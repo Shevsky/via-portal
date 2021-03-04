@@ -18,7 +18,10 @@ export function usePortal(id: string): HTMLDivElement {
     document.body.insertAdjacentElement('beforeend', portal);
 
     return (): void => {
-      document.body.removeChild(portal);
+      if (portal.parentNode === document.body) {
+        document.body.removeChild(portal);
+      }
+
       portal.remove();
     };
   }, []);
